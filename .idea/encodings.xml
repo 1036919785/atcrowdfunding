@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/Atcrowdfunding_bean" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Atcrowdfunding_common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Atcrowdfunding_main" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Atcrowdfunding_manager_api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Atcrowdfunding_manager_impl" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Atcrowdfunding_parent" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Atcrowdfunding_potal_api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Atcrowdfunding_potal_impl" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,57 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Atcrowdfunding_common:war exploded">
+    <output-path>$PROJECT_DIR$/Atcrowdfunding_common/target/Atcrowdfunding_common</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>Atcrowdfunding_common</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Atcrowdfunding_common" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="Atcrowdfunding-bean-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="Atcrowdfunding_bean" />
+          </element>
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:unknown" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:unknown" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:unknown" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-orm:unknown" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:unknown" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:unknown" />
+          <element id="library" level="project" name="Maven: com.mchange:c3p0:unknown" />
+          <element id="library" level="project" name="Maven: cglib:cglib:unknown" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:unknown" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:unknown" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:unknown" />
+          <element id="library" level="project" name="Maven: log4j:log4j:unknown" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:unknown" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:unknown" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:unknown" />
+          <element id="library" level="project" name="Maven: jstl:jstl:unknown" />
+          <element id="library" level="project" name="Maven: net.sf.ehcache:ehcache:unknown" />
+          <element id="library" level="project" name="Maven: org.quartz-scheduler:quartz:unknown" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:unknown" />
+          <element id="library" level="project" name="Maven: commons-collections:commons-collections:unknown" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:unknown" />
+          <element id="library" level="project" name="Maven: org.apache.poi:poi:unknown" />
+          <element id="library" level="project" name="Maven: org.jfree:jfreechart:unknown" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:unknown" />
+          <element id="library" level="project" name="Maven: org.freemarker:freemarker:unknown" />
+          <element id="library" level="project" name="Maven: org.activiti:activiti-engine:unknown" />
+          <element id="library" level="project" name="Maven: org.activiti:activiti-spring:unknown" />
+          <element id="library" level="project" name="Maven: org.apache.commons:commons-email:unknown" />
+          <element id="library" level="project" name="Maven: org.activiti:activiti-explorer:unknown" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/Atcrowdfunding_common/target/Atcrowdfunding_common/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="Atcrowdfunding_common/web/Web" />
+    </root>
+  </artifact>
+</component>

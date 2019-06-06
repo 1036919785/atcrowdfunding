@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Atcrowdfunding_parent:war">
+    <output-path>$PROJECT_DIR$/Atcrowdfunding_parent/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Atcrowdfunding_parent</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Atcrowdfunding-parent.war">
+      <element id="artifact" artifact-name="Atcrowdfunding_parent:war exploded" />
+    </root>
+  </artifact>
+</component>

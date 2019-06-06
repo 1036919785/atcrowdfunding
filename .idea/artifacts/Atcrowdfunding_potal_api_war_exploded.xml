@@ -1,0 +1,31 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Atcrowdfunding_potal_api:war exploded">
+    <output-path>$PROJECT_DIR$/Atcrowdfunding_potal_api/target/Atcrowdfunding_potal_api</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>Atcrowdfunding_potal_api</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Atcrowdfunding_potal_api" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="Atcrowdfunding-bean-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="Atcrowdfunding_bean" />
+          </element>
+          <element id="archive" name="Atcrowdfunding_common-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="Atcrowdfunding_common" />
+          </element>
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/Atcrowdfunding_potal_api/target/Atcrowdfunding_potal_api/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="Atcrowdfunding_potal_api/web/Web" />
+    </root>
+  </artifact>
+</component>
