@@ -1,14 +1,9 @@
 package com.atguigu.atcrowdfunding.manager.controller;
 
-import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.manager.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @Author:jiege
@@ -27,7 +22,7 @@ public class PermissionController {
         return "permission/index";
     }
 
-    @ResponseBody
+   /* @ResponseBody
     @RequestMapping("/initZtree")
     public Object initZtree(){
 
@@ -51,7 +46,7 @@ public class PermissionController {
         for (Permission innerChild : childrenPermission){
             queryChild(innerChild);
         }
-    }
+    }*/
 
 
   /*  @ResponseBody
