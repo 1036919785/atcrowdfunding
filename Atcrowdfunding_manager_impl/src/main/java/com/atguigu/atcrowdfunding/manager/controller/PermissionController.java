@@ -79,7 +79,7 @@ public class PermissionController {
             queryChild(innerChild);
         }
     }
-*/
+
 
   /*  @ResponseBody
     @RequestMapping("/initZtree")
