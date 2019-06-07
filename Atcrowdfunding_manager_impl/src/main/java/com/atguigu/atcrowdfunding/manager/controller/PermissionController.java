@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author:jiege
@@ -28,6 +30,32 @@ public class PermissionController {
     }
 
     @ResponseBody
+    @RequestMapping("/initZtree")
+    public Object initAtree(){
+        List<Permission> root = new ArrayList<Permission>();
+        try {
+            List<Permission> permissions = permissionService.QueryAllPermisson();
+            Map<Integer,Permission> map = new HashMap<Integer, Permission>();
+            for (Permission innerPermission : permissions){
+                map.put(innerPermission.getId(),innerPermission);
+            }
+            for (Permission child : permissions){
+                if (child.getPid()==null){
+                    root.add(child);
+                }else {
+                    Permission parent = map.get(child.getPid());
+                    parent.getChildren().add(child);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return root;
+    }
+
+   /* @ResponseBody
     @RequestMapping("/initZtree")
     public Object initAtree(){
         List<Permission> root = null;
@@ -52,7 +80,7 @@ public class PermissionController {
         }
 
         return root;
-    }
+    }*/
 
    /* @ResponseBody
     @RequestMapping("/initZtree")
