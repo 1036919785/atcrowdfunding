@@ -43,8 +43,7 @@ public class PermissionController {
                 if (child.getPid()==null){
                     root.add(child);
                 }else {
-                    Permission parent = map.get(child.getPid());
-                    parent.getChildren().add(child);
+                    map.get(child.getPid()).getChildren().add(child);
                 }
             }
 
