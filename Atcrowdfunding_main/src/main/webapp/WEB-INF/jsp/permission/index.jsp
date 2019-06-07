@@ -161,7 +161,10 @@
                     //alert("hello")
                     var zNodes = result;
                     $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-                }
+                },
+            error:function () {
+                alert("查询失败!")
+            }
 
 
 

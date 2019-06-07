@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunding.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Permission {
@@ -15,7 +16,7 @@ public class Permission {
 
     private boolean open;
 
-    private List<Permission> children;
+    private List<Permission> children = new ArrayList<Permission>();
 
     public boolean isOpen() {
         return open;

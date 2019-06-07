@@ -20,4 +20,6 @@ public interface PermissionMapper {
     Permission queryRootPermission();
 
     List<Permission> queryChildrenPermission(Integer id);
+
+    List<Permission> QueryAllPermisson();
 }

@@ -9,7 +9,11 @@ import java.util.List;
  * @Date: 2019/6/5 17:44
  */
 public interface PermissionService {
+
+
     Permission queryRootPermission();
 
     List<Permission> queryChildrenPermission(Integer id);
+
+    List<Permission> QueryAllPermisson();
 }

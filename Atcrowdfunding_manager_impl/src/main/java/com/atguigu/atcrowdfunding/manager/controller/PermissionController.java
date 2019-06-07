@@ -29,6 +29,33 @@ public class PermissionController {
 
     @ResponseBody
     @RequestMapping("/initZtree")
+    public Object initAtree(){
+        List<Permission> root = null;
+        try {
+            root = new ArrayList<Permission>();
+            List<Permission> permissions = permissionService.QueryAllPermisson();
+            for (Permission permission : permissions){
+                if (permission.getPid()==null){
+                    root.add(permission);
+                }else {
+                    for (Permission innerPermission : permissions){
+                        if (permission.getPid()==innerPermission.getId()){
+                            Permission parent = innerPermission;
+                            parent.getChildren().add(permission);
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return root;
+    }
+
+   /* @ResponseBody
+    @RequestMapping("/initZtree")
     public Object initZtree(){
 
 
@@ -52,7 +79,7 @@ public class PermissionController {
             queryChild(innerChild);
         }
     }
-
+*/
 
   /*  @ResponseBody
     @RequestMapping("/initZtree")

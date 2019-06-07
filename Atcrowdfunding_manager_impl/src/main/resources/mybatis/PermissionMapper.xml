@@ -44,6 +44,10 @@
     select * from t_permission where pid = #{id}
   </select>
 
+    <select id="QueryAllPermisson" resultType="com.atguigu.atcrowdfunding.bean.Permission">
+        select * from t_permission
+    </select>
+
 
 
 

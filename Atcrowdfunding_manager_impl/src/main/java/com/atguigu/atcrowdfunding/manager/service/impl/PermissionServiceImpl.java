@@ -26,4 +26,9 @@ public class PermissionServiceImpl implements PermissionService {
     public List<Permission> queryChildrenPermission(Integer id) {
         return permissionMapper.queryChildrenPermission(id);
     }
+
+    @Override
+    public List<Permission> QueryAllPermisson() {
+        return permissionMapper.QueryAllPermisson();
+    }
 }
