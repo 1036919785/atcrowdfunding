@@ -2,6 +2,7 @@ package com.atguigu.atcrowdfunding.manager.controller;
 
 import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.manager.service.PermissionService;
+import com.atguigu.atcrowdfunding.util.jsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +30,33 @@ public class PermissionController {
         return "permission/index";
     }
 
+    @RequestMapping("/toAdd")
+    public String toAdd(){
+        return "permission/add";
+    }
+
+    @ResponseBody
+    @RequestMapping("/doAdd")
+    public Object doAdd(Permission permission){
+        jsonResult jsonResult = new jsonResult();
+
+        try {
+            int count = permissionService.savePermisson(permission);
+            jsonResult.setSuccessful(count==1);
+        } catch (Exception e) {
+            jsonResult.setSuccessful(false);
+            jsonResult.setMessage("添加许可失败!");
+            e.printStackTrace();
+        }
+
+        return jsonResult;
+    }
+
     @ResponseBody
     @RequestMapping("/initZtree")
     public Object initAtree(){
         List<Permission> root = new ArrayList<Permission>();
+        List<Permission> children = new ArrayList<Permission>();
         try {
             List<Permission> permissions = permissionService.QueryAllPermisson();
             Map<Integer,Permission> map = new HashMap<Integer, Permission>();
@@ -42,8 +66,10 @@ public class PermissionController {
             for (Permission child : permissions){
                 if (child.getPid()==null){
                     root.add(child);
-                }else {
-                    map.get(child.getPid()).getChildren().add(child);
+                }else if (child.getPid()!=null){
+                    Permission permission = map.get(child.getPid());
+                    children = permission.getChildren();
+                    children.add(child);
                 }
             }
 

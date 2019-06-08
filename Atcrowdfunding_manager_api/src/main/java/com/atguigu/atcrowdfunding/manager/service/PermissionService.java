@@ -16,4 +16,6 @@ public interface PermissionService {
     List<Permission> queryChildrenPermission(Integer id);
 
     List<Permission> QueryAllPermisson();
+
+    int savePermisson(Permission permission);
 }

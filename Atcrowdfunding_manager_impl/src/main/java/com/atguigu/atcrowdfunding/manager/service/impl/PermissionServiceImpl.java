@@ -31,4 +31,9 @@ public class PermissionServiceImpl implements PermissionService {
     public List<Permission> QueryAllPermisson() {
         return permissionMapper.QueryAllPermisson();
     }
+
+    @Override
+    public int savePermisson(Permission permission) {
+        return permissionMapper.insert(permission);
+    }
 }
