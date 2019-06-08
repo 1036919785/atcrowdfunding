@@ -16,6 +16,26 @@ public class Permission {
 
     private boolean open;
 
+    private int level;
+
+    private boolean checked;
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
     private List<Permission> children = new ArrayList<Permission>();
 
     public boolean isOpen() {
