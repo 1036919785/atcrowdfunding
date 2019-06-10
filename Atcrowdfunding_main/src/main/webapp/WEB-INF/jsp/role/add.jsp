@@ -30,7 +30,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li style="padding-top:8px;">
-				<%@include file="/WEB-INF/jsp/common/userinfo.jsp" %>
+				<%@include file="/WEB-INF/jsp/common/main.jsp" %>
 			</li>
             <li style="margin-left:10px;padding-top:8px;">
 				<button type="button" class="btn btn-default btn-danger">
@@ -63,7 +63,7 @@
 			  <div class="panel-body">
 				<form>
 				  <div class="form-group">
-					<label for="exampleInputPassword1">角色名称</label>
+					<label for="name">角色名称</label>
 					<input type="text" class="form-control" id="name" placeholder="请输入角色名称">
 				  </div>
 				  <button id="saveBtn" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> 新增</button>
@@ -118,7 +118,7 @@
 				});
             });
             
-            $("#saveBtn").click(function(){
+           /* $("#saveBtn").click(function(){
             	var loadingIndex = -1;
             	// 提交表单
             	$.ajax({
@@ -141,7 +141,7 @@
             			}
             		}
             	});
-            });
+            });*/
         </script>
   </body>
 </html>
