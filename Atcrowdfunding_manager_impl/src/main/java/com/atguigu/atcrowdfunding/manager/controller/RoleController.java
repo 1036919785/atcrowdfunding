@@ -42,6 +42,20 @@ public class RoleController {
         }
         return jsonResult;
     }
+    @ResponseBody
+    @RequestMapping("/deleRoleById")
+    public Object deleRoleById(Integer id){
+        jsonResult jsonResult = new jsonResult();
+        try {
+            int count = rolerService.deleRoleById(id);
+            jsonResult.setSuccessful(true);
+        } catch (Exception e) {
+            jsonResult.setSuccessful(false);
+            jsonResult.setMessage("删除角色失败!");
+            e.printStackTrace();
+        }
+        return jsonResult;
+    }
 
 
     @RequestMapping("/index")

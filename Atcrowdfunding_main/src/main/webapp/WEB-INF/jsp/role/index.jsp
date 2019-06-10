@@ -255,7 +255,7 @@
                         context += ' <td> ';
                         context += '  <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button> ';
                         context += ' <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button> ';
-                        context += ' <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button> ';
+                        context += ' <button type="button" class="btn btn-danger btn-xs" onclick="deleteRoleById('+n.id+',\''+n.name+'\')" ><i class=" glyphicon glyphicon-remove"></i></button> ';
                         context += ' </td> ';
                         context += ' </tr> ';
                     });
@@ -287,36 +287,6 @@
 
                     $("#tfoot").html(contentBar) ;
 
-
-
-
-                    /*  <tr >
-                          <td colspan="6" align="center">
-                              <ul class="pagination">
-                              <li class="disabled"><a href="#">上一页</a></li>
-                          <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
-                          <li><a href="#">下一页</a></li>
-                          </ul>
-                          </td>
-                      </tr>*/
-
-                    /* <tr>
-                         <td>1</td>
-                         <td><input type="checkbox"></td>
-                             <td>PM - 项目经理</td>
-                             <td>
-                             <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
-                         <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
-                         <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
-                         </td>
-                         </tr>*/
-
-
-
                } else {
                    layer.msg("页面加载失败!", {time:1000, icon:5, shift:6});
                }
@@ -325,6 +295,39 @@
                 layer.msg("页面加载失败!", {time:1000, icon:5, shift:6});
             }
         });
+    }
+
+    function deleteRoleById(id,name) {
+
+        layer.confirm("确定删除["+name+"]吗?",  {icon: 3, title:'提示'}, function(cindex){
+            layer.close(cindex);
+            $.ajax({
+                type:"POST",
+                data:{
+                    "id":id
+                },
+                url:"${APP_PATH}/role/deleRoleById.do",
+                beforeSend:function () {
+                    return true;
+                },
+                success:function (result) {
+                    if (result.successful){
+                        layer.msg("删除成功!", {time:1000, icon:6, shift:6}, function () {
+                            window.location.href="${APP_PATH}/role/index.htm" ;
+                        });
+                    } else {
+                        layer.msg(result.message, {time:1000, icon:5, shift:6});
+                    }
+                },
+                error:function () {
+                    layer.msg("删除角色失败!", {time:1000, icon:5, shift:6});
+                }
+            });
+        }, function(cindex){
+            layer.close(cindex);
+        });
+
+
     }
     
 </script>

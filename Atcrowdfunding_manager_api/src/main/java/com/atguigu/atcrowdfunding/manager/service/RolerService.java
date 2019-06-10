@@ -13,6 +13,8 @@ public interface RolerService {
 
     int doAdd(String name);
 
+    int deleRoleById(Integer id);
+
     //Page queryRole(Integer pageno, Integer pagesize);
 
 }

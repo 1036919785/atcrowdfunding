@@ -37,6 +37,11 @@ public class RoleServiceImpl implements RolerService {
         return roleMapper.doAdd(name);
     }
 
+    @Override
+    public int deleRoleById(Integer id) {
+        return roleMapper.deleteByPrimaryKey(id);
+    }
+
    /* @Override
     public Page queryRole(Integer pageno, Integer pagesize) {
         Page page = new Page(pageno,pagesize);
