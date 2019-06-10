@@ -1,4 +1,4 @@
-<%@page pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -28,19 +28,7 @@
             <div><a class="navbar-brand" style="font-size:32px;" href="user.html">众筹平台 - 角色维护</a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li style="padding-top:8px;">
-				<%@include file="/WEB-INF/jsp/common/main.jsp" %>
-			</li>
-            <li style="margin-left:10px;padding-top:8px;">
-				<button type="button" class="btn btn-default btn-danger">
-				  <span class="glyphicon glyphicon-question-sign"></span> 帮助
-				</button>
-			</li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
+			<jsp:include page="/WEB-INF/jsp/common/main.jsp"></jsp:include>
         </div>
       </div>
     </nav>
@@ -117,12 +105,41 @@
 					}
 				});
             });
+
+			var loadingIndex = -1 ;
+            $("#saveBtn").click(function () {
+				var name = $("#name") ;
+				/*alert(name.val());*/
+				$.ajax({
+					type:"POST",
+					data:{
+						"name":name.val()
+					},
+					url:"${APP_PATH}/role/doAdd.do",
+					beforeSend:function () {
+						loadingIndex = layer.msg('数据保存中', {icon: 16});
+						return true;
+					},
+					success:function (result) {
+
+						if (result.successful){
+							layer.close(loadingIndex);
+							/*alert(result.successful) ;*/
+							layer.msg("角色信息保存成功", {time:1000, icon:6})
+							window.location.href="${APP_PATH}/role/index.htm" ;
+						}
+						else {
+							layer.msg("角色信息保存失败", {time:1000, icon:5, shift:6});
+						}
+					}
+				});
+			});
             
            /* $("#saveBtn").click(function(){
             	var loadingIndex = -1;
             	// 提交表单
             	$.ajax({
-            		url : "${APP_PATH}/role/doAdd.do",
+
             		type : "POST",
             		data : {
             			"name"  : $("#name").val()
@@ -134,7 +151,7 @@
             			layer.close(loadingIndex);
             			if ( result.success ) {
             				layer.msg("角色信息保存成功", {time:1000, icon:6}, function(){
-            					window.location.href = "${APP_PATH}/role/index.htm";
+
             				});
             			} else {
             				layer.msg("角色信息保存失败", {time:1000, icon:5, shift:6});

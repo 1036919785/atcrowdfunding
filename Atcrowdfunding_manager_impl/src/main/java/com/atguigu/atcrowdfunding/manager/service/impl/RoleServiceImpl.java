@@ -32,6 +32,11 @@ public class RoleServiceImpl implements RolerService {
         return page;
     }
 
+    @Override
+    public int doAdd(String name) {
+        return roleMapper.doAdd(name);
+    }
+
    /* @Override
     public Page queryRole(Integer pageno, Integer pagesize) {
         Page page = new Page(pageno,pagesize);

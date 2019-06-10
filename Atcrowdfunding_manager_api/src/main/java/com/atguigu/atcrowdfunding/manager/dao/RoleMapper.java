@@ -26,4 +26,6 @@ public interface RoleMapper {
     List<Role> queryRoleByMap(Map<String, Object> map);
 
     Integer queryTotalSizeByMap(Map<String, Object> map);
+
+    int doAdd(String name);
 }

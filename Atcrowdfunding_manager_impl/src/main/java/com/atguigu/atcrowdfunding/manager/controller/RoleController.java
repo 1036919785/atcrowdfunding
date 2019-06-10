@@ -23,6 +23,27 @@ public class RoleController {
     @Autowired
     private RolerService rolerService;
 
+    @RequestMapping("/add")
+    public String add(){
+        return "role/add" ;
+    }
+
+    @ResponseBody
+    @RequestMapping("/doAdd")
+    public Object doAdd(String name){
+        jsonResult jsonResult = new jsonResult();
+        try {
+            int count = rolerService.doAdd(name);
+            jsonResult.setSuccessful(true);
+        } catch (Exception e) {
+            jsonResult.setMessage("保存角色信息失败!");
+            jsonResult.setSuccessful(false);
+            e.printStackTrace();
+        }
+        return jsonResult;
+    }
+
+
     @RequestMapping("/index")
     public String index(){
         return "role/index";

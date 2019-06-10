@@ -11,6 +11,8 @@ import java.util.Map;
 public interface RolerService {
     Page queryRole(Map<String, Object> map);
 
+    int doAdd(String name);
+
     //Page queryRole(Integer pageno, Integer pagesize);
 
 }

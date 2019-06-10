@@ -55,4 +55,8 @@
     </where>
   </select>
 
+  <insert id="doAdd" parameterType="string">
+    insert into t_role(name) values (#{name})
+  </insert>
+
 </mapper>
