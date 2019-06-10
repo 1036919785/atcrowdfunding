@@ -18,13 +18,41 @@
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultType="Role" parameterType="java.lang.Integer" >
     select id, name
     from t_role
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
+  <select id="selectAll" resultType="Role" >
     select id, name
     from t_role
   </select>
+
+  <select id="queryRole" resultType="Role">
+    select * from t_role limit ${startIndex},#{pagesize}
+
+  </select>
+  <select id="queryTotalSize" resultType="int">
+    select count(*) from t_role
+  </select>
+
+  <select id="queryRoleByMap" resultType="Role" parameterType="map">
+    select * from t_role
+    <where>
+      <if test="seachText!=null">
+        name like concat("%",#{seachText},"%")
+      </if>
+    </where>
+    limit ${startIndex},#{pagesize}
+  </select>
+
+  <select id="queryTotalSizeByMap" resultType="integer" parameterType="map">
+    select count(*) from t_role
+    <where>
+      <if test="seachText!=null">
+        name like concat("%",#{seachText},"%")
+      </if>
+    </where>
+  </select>
+
 </mapper>

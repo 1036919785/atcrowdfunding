@@ -5,7 +5,7 @@
   Time: 18:15
   To change this template use File | Settings | File Templates.
 --%>
-<%@page pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -36,29 +36,7 @@
             <div><a class="navbar-brand" style="font-size:32px;" href="#">众筹平台 - 角色维护</a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li style="padding-top:8px;">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
-                            <i class="glyphicon glyphicon-user"></i> 张三 <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
-                            <li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
-                            <li class="divider"></li>
-                            <li><a href="index.html"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li style="margin-left:10px;padding-top:8px;">
-                    <button type="button" class="btn btn-default btn-danger">
-                        <span class="glyphicon glyphicon-question-sign"></span> 帮助
-                    </button>
-                </li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
+           <jsp:include page="/WEB-INF/jsp/common/main.jsp"></jsp:include>
         </div>
     </div>
 </nav>
@@ -80,10 +58,10 @@
                         <div class="form-group has-feedback">
                             <div class="input-group">
                                 <div class="input-group-addon">查询条件</div>
-                                <input class="form-control has-success" type="text" placeholder="请输入查询条件">
+                                <input class="form-control has-success" type="text" id="seachText" placeholder="请输入查询条件">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
+                        <button type="button" class="btn btn-warning" id="queryBtn"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
                     <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
                     <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='form.html'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
@@ -99,8 +77,8 @@
                                 <th width="100">操作</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
+                            <tbody id="roleTbody">
+                            <%--<tr>
                                 <td>1</td>
                                 <td><input type="checkbox"></td>
                                 <td>PM - 项目经理</td>
@@ -189,10 +167,10 @@
                                     <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
                                     <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
                                 </td>
-                            </tr>
+                            </tr>--%>
                             </tbody>
-                            <tfoot>
-                            <tr >
+                            <tfoot id="tfoot">
+                            <%--<tr >
                                 <td colspan="6" align="center">
                                     <ul class="pagination">
                                         <li class="disabled"><a href="#">上一页</a></li>
@@ -204,7 +182,7 @@
                                         <li><a href="#">下一页</a></li>
                                     </ul>
                                 </td>
-                            </tr>
+                            </tr>--%>
 
                             </tfoot>
                         </table>
@@ -218,6 +196,8 @@
 <script src="${APP_PATH}/jquery/jquery-2.1.1.min.js"></script>
 <script src="${APP_PATH}/bootstrap/js/bootstrap.min.js"></script>
 <script src="${APP_PATH}/script/docs.min.js"></script>
+<script src="${APP_PATH}/jquery/layer/layer.js"></script>
+
 <script type="text/javascript">
     $(function () {
         $(".list-group-item").click(function(){
@@ -230,11 +210,122 @@
                 }
             }
         });
+        queryRole(1);
     });
 
     $("tbody .btn-success").click(function(){
         window.location.href = "assignPermission.html";
     });
+
+    function changPage(pageno) {
+        queryRole(pageno) ;
+    }
+
+    $("#queryBtn").click(function () {
+        queryRole(1) ;
+    });
+
+    var loadingIndex = -1;
+
+    function queryRole(pageno) {
+
+        var dataObj = {} ;
+        dataObj.pageno = pageno;
+        dataObj.seachText = $("#seachText").val();
+        $.ajax({
+            type:"POST",
+            data:dataObj,
+            url:"${APP_PATH}/role/doIndex.do",
+            before:function(){
+                loadingIndex = layer.msg('处理中', {icon: 16});
+            },
+            success:function (result) {
+                if (result.successful) {
+                    layer.close(loadingIndex);
+                    //alert(result.page);
+                    var page = result.page;
+                    var datas = page.datas;
+                    var context = "";
+                    $.each(datas, function (i, n) {
+                        context += ' <tr> ';
+                        context += ' <td>' + (i + 1) + '</td> ';
+                        context += ' <td><input type="checkbox"></td> ';
+                        context += '  <td>' + n.name + '</td> ';
+                        context += ' <td> ';
+                        context += '  <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button> ';
+                        context += ' <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button> ';
+                        context += ' <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button> ';
+                        context += ' </td> ';
+                        context += ' </tr> ';
+                    });
+                    var tbody = $("#roleTbody").html(context);
+
+                    var contentBar = "";
+                    contentBar += ' <tr > ';
+                    contentBar += ' <td colspan="6" align="center"> ';
+                    contentBar += ' <ul class="pagination"> ';
+                    if (page.pageno == 1) {
+                        contentBar += ' <li class="disabled"><a href="#">上一页</a></li> ';
+                    } else {
+                        contentBar += ' <li><a href="javascript:void(0);" onclick="changPage(' + (page.pageno - 1) + ')">上一页</a></li> ';
+                    }
+
+                    for (var i = 1; i <= page.totalno; i++) {
+                        contentBar += ' <li ';
+                        if (page.pageno == i) {
+                            contentBar += ' class="active" ';
+                        }
+                        contentBar += ' ><a href="#" onclick="changPage('+i+')" >' + i + '</a></li> ';
+                    }
+
+                    if (page.totalno == page.pageno) {
+                        contentBar += ' <li class="disabled"><a href="#">下一页</a></li> ';
+                    } else {
+                        contentBar += ' <li><a href="#" onclick="changPage('+(page.pageno+1)+')">下一页</a></li> ';
+                    }
+
+                    $("#tfoot").html(contentBar) ;
+
+
+
+
+                    /*  <tr >
+                          <td colspan="6" align="center">
+                              <ul class="pagination">
+                              <li class="disabled"><a href="#">上一页</a></li>
+                          <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                          <li><a href="#">2</a></li>
+                          <li><a href="#">3</a></li>
+                          <li><a href="#">4</a></li>
+                          <li><a href="#">5</a></li>
+                          <li><a href="#">下一页</a></li>
+                          </ul>
+                          </td>
+                      </tr>*/
+
+                    /* <tr>
+                         <td>1</td>
+                         <td><input type="checkbox"></td>
+                             <td>PM - 项目经理</td>
+                             <td>
+                             <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button>
+                         <button type="button" class="btn btn-primary btn-xs"><i class=" glyphicon glyphicon-pencil"></i></button>
+                         <button type="button" class="btn btn-danger btn-xs"><i class=" glyphicon glyphicon-remove"></i></button>
+                         </td>
+                         </tr>*/
+
+
+
+               } else {
+                   layer.msg("页面加载失败!", {time:1000, icon:5, shift:6});
+               }
+            },
+            error:function () {
+                layer.msg("页面加载失败!", {time:1000, icon:5, shift:6});
+            }
+        });
+    }
+    
 </script>
 </body>
 </html>
