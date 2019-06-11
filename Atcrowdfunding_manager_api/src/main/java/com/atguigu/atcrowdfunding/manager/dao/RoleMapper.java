@@ -35,4 +35,8 @@ public interface RoleMapper {
     int updateRole(Role role);
 
     int deleteBathById(VoModel model);
+
+    void deleteRolePermission(Integer roleId);
+
+    int insertRolePermission(@Param("roleId") Integer roleId,@Param("model") VoModel model);
 }

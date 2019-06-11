@@ -74,4 +74,14 @@
     </foreach>
   </delete>
 
+  <delete id="deleteRolePermission" parameterType="integer">
+    delete from t_role_permission where roleid = #{roleId}
+  </delete>
+
+  <insert id="insertRolePermission">
+    <foreach collection="model.ids" separator=";" item="id">
+      insert into t_role_permission(roleid,permissionid) values (#{roleId},#{id})
+    </foreach>
+  </insert>
+
 </mapper>

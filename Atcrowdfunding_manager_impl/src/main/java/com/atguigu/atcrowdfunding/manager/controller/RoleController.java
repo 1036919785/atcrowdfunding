@@ -67,6 +67,23 @@ public class RoleController {
         return root;
     }
 
+    @ResponseBody
+    @RequestMapping("/updateAssignPermissionById")
+    public Object assignPermissionById(Integer roleId,VoModel model){
+
+        jsonResult jsonResult = new jsonResult();
+
+        try {
+            int count = rolerService.updateAssignPermissionById(roleId,model);
+            jsonResult.setSuccessful(true);
+        } catch (Exception e) {
+            jsonResult.setMessage("更新权限失败!");
+            e.printStackTrace();
+        }
+
+        return jsonResult;
+    }
+
     @RequestMapping("/assignPermission")
     public String assignPermission(){
         return "role/assignPermission";

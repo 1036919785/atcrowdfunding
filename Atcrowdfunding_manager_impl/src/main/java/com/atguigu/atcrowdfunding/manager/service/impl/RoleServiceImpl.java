@@ -58,6 +58,13 @@ public class RoleServiceImpl implements RolerService {
         return roleMapper.deleteBathById(model);
     }
 
+    @Override
+    public int updateAssignPermissionById(Integer id, VoModel model) {
+        roleMapper.deleteRolePermission(id);
+        int count = roleMapper.insertRolePermission(id,model);
+        return count;
+    }
+
    /* @Override
     public Page queryRole(Integer pageno, Integer pagesize) {
         Page page = new Page(pageno,pagesize);

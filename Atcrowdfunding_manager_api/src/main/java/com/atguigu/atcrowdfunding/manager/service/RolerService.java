@@ -23,6 +23,8 @@ public interface RolerService {
 
     int deleteBathById(VoModel model);
 
+    int updateAssignPermissionById(Integer id, VoModel model);
+
     //Page queryRole(Integer pageno, Integer pagesize);
 
 }
