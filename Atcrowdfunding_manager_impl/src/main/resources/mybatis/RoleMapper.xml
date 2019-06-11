@@ -18,17 +18,17 @@
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultType="Role" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultType="com.atguigu.atcrowdfunding.bean.Role" parameterType="java.lang.Integer" >
     select id, name
     from t_role
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultType="Role" >
+  <select id="selectAll" resultType="com.atguigu.atcrowdfunding.bean.Role" >
     select id, name
     from t_role
   </select>
 
-  <select id="queryRole" resultType="Role">
+  <select id="queryRole" resultType="com.atguigu.atcrowdfunding.bean.Role">
     select * from t_role limit ${startIndex},#{pagesize}
 
   </select>
@@ -36,7 +36,7 @@
     select count(*) from t_role
   </select>
 
-  <select id="queryRoleByMap" resultType="Role" parameterType="map">
+  <select id="queryRoleByMap" resultType="com.atguigu.atcrowdfunding.bean.Role" parameterType="map">
     select * from t_role
     <where>
       <if test="seachText!=null">
@@ -58,5 +58,13 @@
   <insert id="doAdd" parameterType="string">
     insert into t_role(name) values (#{name})
   </insert>
+
+  <select id="queryRoleByid" parameterType="integer" resultType="com.atguigu.atcrowdfunding.bean.Role">
+    select * from t_role where id=#{id}
+  </select>
+
+  <update id="updateRole" parameterType="com.atguigu.atcrowdfunding.bean.Role">
+    update t_role set name =#{name} where id=#{id}
+  </update>
 
 </mapper>

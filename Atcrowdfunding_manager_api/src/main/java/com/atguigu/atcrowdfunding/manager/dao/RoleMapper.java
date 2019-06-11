@@ -28,4 +28,8 @@ public interface RoleMapper {
     Integer queryTotalSizeByMap(Map<String, Object> map);
 
     int doAdd(String name);
+
+    Role queryRoleByid(Integer id);
+
+    int updateRole(Role role);
 }

@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunding.manager.controller;
 
+import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.manager.service.RolerService;
 import com.atguigu.atcrowdfunding.util.Page;
 import com.atguigu.atcrowdfunding.util.StringUtil;
@@ -52,6 +53,27 @@ public class RoleController {
         } catch (Exception e) {
             jsonResult.setSuccessful(false);
             jsonResult.setMessage("删除角色失败!");
+            e.printStackTrace();
+        }
+        return jsonResult;
+    }
+
+    @RequestMapping("/edit")
+    public String edit(Integer id,Map map){
+        Role role = rolerService.queryRoleByid(id);
+        map.put("role",role);
+        return "role/edit";
+    }
+    @ResponseBody
+    @RequestMapping("/toEdit")
+    public Object toEdit(Role role){
+        jsonResult jsonResult = new jsonResult();
+        try {
+            int count = rolerService.updateRole(role);
+            jsonResult.setSuccessful(count==1);
+        } catch (Exception e) {
+            jsonResult.setSuccessful(false);
+            jsonResult.setMessage("角色数据修改失败");
             e.printStackTrace();
         }
         return jsonResult;

@@ -1,4 +1,4 @@
-<%@page pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8" isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -28,19 +28,7 @@
             <div><a class="navbar-brand" style="font-size:32px;" href="role.html">众筹平台 - 角色维护</a></div>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li style="padding-top:8px;">
-				<%@include file="/WEB-INF/jsp/common/main.jsp" %>
-			</li>
-            <li style="margin-left:10px;padding-top:8px;">
-				<button type="button" class="btn btn-default btn-danger">
-				  <span class="glyphicon glyphicon-question-sign"></span> 帮助
-				</button>
-			</li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
+			<%@include file="/WEB-INF/jsp/common/main.jsp" %>
         </div>
       </div>
     </nav>
@@ -117,6 +105,41 @@
 					}
 				});
             });
+            $(function () {
+            	var loadingIndex = -1;
+				$("#updateBtn").click(function () {
+					$.ajax({
+						type:"post",
+						data:{
+							name:$("#name").val(),
+							id:${role.id}
+						},
+						url:"${APP_PATH}/role/toEdit.do",
+						beforeSend:function () {
+							loadingIndex = layer.msg('数据正在修改中', {icon: 6});
+							return true ;
+						},
+						success:function (result) {
+							if (result.successful){
+								layer.close(loadingIndex);
+								loadingIndex = layer.msg('数据正在修改中', {icon: 6});
+								window.location.href = "${APP_PATH}/role/index.htm" ;
+							} else {
+								layer.msg("角色数据修改失败", {time:1000, icon:5, shift:6});
+							}
+						},
+						error : function(){
+							layer.msg("角色数据修改失败", {time:2000, icon:5, shift:6});
+						}
+					});
+				});
+			})
+			$(function () {
+				$("#resetBtn").click(function () {
+					$("#updateForm")[0].reset();
+				});
+			})
+
        /*     $(function(){
             	$("#updateBtn").click(function(){
                 	var loadingIndex = -1 ;
