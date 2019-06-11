@@ -63,7 +63,7 @@
                         </div>
                         <button type="button" class="btn btn-warning" id="queryBtn"><i class="glyphicon glyphicon-search"></i> 查询</button>
                     </form>
-                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
+                    <button type="button" class="btn btn-danger" style="float:right;margin-left:10px;" onclick="deleteBatnById()"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
                     <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='${APP_PATH}/role/add.htm'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
                     <br>
                     <hr style="clear:both;">
@@ -72,7 +72,7 @@
                             <thead>
                             <tr >
                                 <th width="30">#</th>
-                                <th width="30"><input type="checkbox"></th>
+                                <th width="30"><input type="checkbox" id="allChecked"></th>
                                 <th>名称</th>
                                 <th width="100">操作</th>
                             </tr>
@@ -250,7 +250,7 @@
                     $.each(datas, function (i, n) {
                         context += ' <tr> ';
                         context += ' <td>' + (i + 1) + '</td> ';
-                        context += ' <td><input type="checkbox"></td> ';
+                        context += ' <td><input type="checkbox" id="'+n.id+'"></td> ';
                         context += '  <td>' + n.name + '</td> ';
                         context += ' <td> ';
                         context += '  <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button> ';
@@ -326,9 +326,57 @@
         }, function(cindex){
             layer.close(cindex);
         });
+    }
 
+    $("#allChecked").click(function () {
+        var status = this.checked;
+        /*alert(status) ;*/
+        var checked = $("tbody tr td input[type='checkbox']") ;
+        $.each(checked,function (i,n) {
+            n.checked = status ;
+        })
+    });
+
+    function deleteBatnById() {
+        var ids = $("tbody tr td input:checked");
+        if (ids.length==0){
+            layer.msg("至少勾选一种角色!", {time:1000, icon:5, shift:6});
+            return false;
+        }
+        var dataObj={};
+        $.each(ids,function (i,n) {
+            dataObj["datas["+i+"].id"] = n.id ;
+           /* alert(n.id) ;*/
+        }) ;
+        layer.confirm("确定删除这些角色?",  {icon: 3, title:'提示'}, function(cindex){
+            layer.close(cindex);
+            $.ajax({
+                type:"post",
+                data:dataObj,
+                url:"${APP_PATH}/role/deleteBathById.do",
+                beforeSend:function () {
+                    return true ;
+                },
+                success:function (result) {
+                    if (result.successful){
+                        layer.msg(result.message, {time:1000, icon:6, shift:6});
+                        window.location.href="${APP_PATH}/role/index.htm" ;
+                    } else {
+                        layer.msg(result.message, {time:1000, icon:5, shift:6});
+                    }
+                },
+                error:function () {
+                    layer.msg("删除角色失败!", {time:1000, icon:5, shift:6});
+                }
+            });
+        }, function(cindex){
+            layer.close(cindex);
+        });
 
     }
+
+
+
     
 </script>
 </body>

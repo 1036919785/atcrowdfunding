@@ -1,6 +1,7 @@
 package com.atguigu.atcrowdfunding.manager.dao;
 
 import com.atguigu.atcrowdfunding.bean.Role;
+import com.atguigu.atcrowdfunding.vo.VoModel;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -32,4 +33,6 @@ public interface RoleMapper {
     Role queryRoleByid(Integer id);
 
     int updateRole(Role role);
+
+    int deleteBathById(VoModel model);
 }

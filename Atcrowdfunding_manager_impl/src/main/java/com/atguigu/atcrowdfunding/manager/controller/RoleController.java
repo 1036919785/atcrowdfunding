@@ -5,6 +5,7 @@ import com.atguigu.atcrowdfunding.manager.service.RolerService;
 import com.atguigu.atcrowdfunding.util.Page;
 import com.atguigu.atcrowdfunding.util.StringUtil;
 import com.atguigu.atcrowdfunding.util.jsonResult;
+import com.atguigu.atcrowdfunding.vo.VoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +56,22 @@ public class RoleController {
             jsonResult.setMessage("删除角色失败!");
             e.printStackTrace();
         }
+        return jsonResult;
+    }
+
+    @ResponseBody
+    @RequestMapping("/deleteBathById")
+    public Object deleteBathById(VoModel model){
+        jsonResult jsonResult = new jsonResult();
+        try {
+            int count = rolerService.deleteBathById(model);
+            jsonResult.setMessage("删除角色成功!");
+            jsonResult.setSuccessful(true);
+        } catch (Exception e) {
+            jsonResult.setMessage("删除角色失败!");
+            e.printStackTrace();
+        }
+
         return jsonResult;
     }
 

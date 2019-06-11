@@ -2,6 +2,7 @@ package com.atguigu.atcrowdfunding.manager.service;
 
 import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.util.Page;
+import com.atguigu.atcrowdfunding.vo.VoModel;
 
 import java.util.Map;
 
@@ -19,6 +20,8 @@ public interface RolerService {
     Role queryRoleByid(Integer id);
 
     int updateRole(Role role);
+
+    int deleteBathById(VoModel model);
 
     //Page queryRole(Integer pageno, Integer pagesize);
 

@@ -67,4 +67,11 @@
     update t_role set name =#{name} where id=#{id}
   </update>
 
+  <delete id="deleteBathById">
+    delete from t_role where id in
+    <foreach collection="datas" open="(" separator="," close=")" item="role">
+      #{role.id}
+    </foreach>
+  </delete>
+
 </mapper>

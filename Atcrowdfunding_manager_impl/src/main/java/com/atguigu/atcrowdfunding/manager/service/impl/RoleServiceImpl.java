@@ -4,6 +4,7 @@ import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.manager.dao.RoleMapper;
 import com.atguigu.atcrowdfunding.manager.service.RolerService;
 import com.atguigu.atcrowdfunding.util.Page;
+import com.atguigu.atcrowdfunding.vo.VoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +51,11 @@ public class RoleServiceImpl implements RolerService {
     @Override
     public int updateRole(Role role) {
         return roleMapper.updateRole(role);
+    }
+
+    @Override
+    public int deleteBathById(VoModel model) {
+        return roleMapper.deleteBathById(model);
     }
 
    /* @Override
