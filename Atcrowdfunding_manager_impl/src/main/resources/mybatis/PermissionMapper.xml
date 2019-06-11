@@ -48,6 +48,10 @@
         select * from t_permission
     </select>
 
+  <select id="queryPermissionIdsForRoleId" parameterType="integer" resultType="integer">
+    select permissionid from t_role_permission where roleid = #{roleId}
+  </select>
+
 
 
 

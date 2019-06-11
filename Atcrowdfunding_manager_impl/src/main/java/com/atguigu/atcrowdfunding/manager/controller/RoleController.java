@@ -1,6 +1,8 @@
 package com.atguigu.atcrowdfunding.manager.controller;
 
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.bean.Role;
+import com.atguigu.atcrowdfunding.manager.service.PermissionService;
 import com.atguigu.atcrowdfunding.manager.service.RolerService;
 import com.atguigu.atcrowdfunding.util.Page;
 import com.atguigu.atcrowdfunding.util.StringUtil;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +28,49 @@ import java.util.Map;
 public class RoleController {
     @Autowired
     private RolerService rolerService;
+
+    @Autowired
+    private PermissionService permissionService;
+
+
+    @ResponseBody
+    @RequestMapping("/loadDataAsync")
+    public Object loadDataAsync(Integer roleId){
+        List<Permission> root = new ArrayList<Permission>();
+        List<Permission> children = new ArrayList<Permission>();
+        try {
+            List<Permission> permissions = permissionService.QueryAllPermisson();
+            //根据id值查询角色已经分配过的权限
+            List<Integer> permissionIdsForRoleId = permissionService.queryPermissionIdsForRoleId(roleId);
+            Map<Integer,Permission> map = new HashMap<Integer, Permission>();
+            for (Permission innerPermission : permissions){
+                //把分配过权限的角色的checked设为true
+                if (permissionIdsForRoleId.contains(innerPermission.getId())){
+                    innerPermission.setChecked(true);
+                }
+                map.put(innerPermission.getId(),innerPermission);
+            }
+            for (Permission child : permissions){
+                if (child.getPid()==null){
+                    root.add(child);
+                }else if (child.getPid()!=null){
+                    Permission permission = map.get(child.getPid());
+                    children = permission.getChildren();
+                    children.add(child);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return root;
+    }
+
+    @RequestMapping("/assignPermission")
+    public String assignPermission(){
+        return "role/assignPermission";
+    }
 
     @RequestMapping("/add")
     public String add(){

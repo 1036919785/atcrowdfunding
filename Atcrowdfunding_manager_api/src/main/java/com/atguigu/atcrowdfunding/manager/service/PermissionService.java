@@ -18,4 +18,6 @@ public interface PermissionService {
     List<Permission> QueryAllPermisson();
 
     int savePermisson(Permission permission);
+
+    List<Integer> queryPermissionIdsForRoleId(Integer roleId);
 }

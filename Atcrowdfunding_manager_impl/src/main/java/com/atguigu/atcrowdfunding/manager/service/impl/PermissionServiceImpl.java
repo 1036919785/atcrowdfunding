@@ -36,4 +36,9 @@ public class PermissionServiceImpl implements PermissionService {
     public int savePermisson(Permission permission) {
         return permissionMapper.insert(permission);
     }
+
+    @Override
+    public List<Integer> queryPermissionIdsForRoleId(Integer roleId) {
+        return permissionMapper.queryPermissionIdsForRoleId(roleId);
+    }
 }

@@ -253,7 +253,7 @@
                         context += ' <td><input type="checkbox" id="'+n.id+'"></td> ';
                         context += '  <td>' + n.name + '</td> ';
                         context += ' <td> ';
-                        context += '  <button type="button" class="btn btn-success btn-xs"><i class=" glyphicon glyphicon-check"></i></button> ';
+                        context += '  <button type="button" class="btn btn-success btn-xs" onclick="window.location.href=\'${APP_PATH}/role/assignPermission.htm?roleId='+n.id+'\'"><i class=" glyphicon glyphicon-check"></i></button> ';
                         context += ' <button type="button" class="btn btn-primary btn-xs" onclick="window.location.href=\'${APP_PATH}/role/edit.htm?id='+n.id+'\'"><i class=" glyphicon glyphicon-pencil"></i></button> ';
                         context += ' <button type="button" class="btn btn-danger btn-xs" onclick="deleteRoleById('+n.id+',\''+n.name+'\')" ><i class=" glyphicon glyphicon-remove"></i></button> ';
                         context += ' </td> ';
