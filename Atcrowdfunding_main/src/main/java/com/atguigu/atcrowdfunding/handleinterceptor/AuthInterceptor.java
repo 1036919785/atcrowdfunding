@@ -1,6 +1,6 @@
 package com.atguigu.atcrowdfunding.handleinterceptor;
 
-import com.atguigu.atcrowdfunding.bean.Permission;
+import com.atguigu.atcrowdfunding.Consts;
 import com.atguigu.atcrowdfunding.manager.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -8,8 +8,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,12 +22,13 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        //1.查询所有访问路径
+     /*   //1.查询所有访问路径
         List<Permission> permissions = permissionService.QueryAllPermisson();
         Set<String> allUris = new HashSet<String>();
         for (Permission permission : permissions){
             allUris.add("/"+permission.getUrl());
-        }
+        }*/
+        Set<String> allUris = (Set<String>) request.getSession().getServletContext().getAttribute(Consts.PERMISSION_URIS);
         String servletPath = request.getServletPath();
         if (allUris.contains(servletPath)){
             HttpSession session = request.getSession();
