@@ -28,13 +28,16 @@
       userid = #{userid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultType="com.atguigu.atcrowdfunding.bean.Advertisement" parameterType="java.lang.Integer" >
     select id, name, iconpath, status, url, userid
     from t_advertisement
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
+  <select id="selectAll" resultType="com.atguigu.atcrowdfunding.bean.Advertisement" >
     select id, name, iconpath, status, url, userid
     from t_advertisement
   </select>
+
+
+
 </mapper>
