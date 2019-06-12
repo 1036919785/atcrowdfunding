@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunding.manager.dao;
 
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.vo.VoModel;
@@ -83,6 +84,8 @@ public interface UserMapper {
     int addAssign(@Param("userid") Integer userid,@Param("model") VoModel model);
 
     int deleteAssign(@Param("userid") Integer userid,@Param("model") VoModel model);
+
+    List<Permission> queryUserPermissonById(Integer id);
 
     /* List<User> queryList(@Param("startIndex") Integer startIndex,@Param("pagesize") Integer pagesize);*/
 

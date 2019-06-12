@@ -1,6 +1,7 @@
 package com.atguigu.atcrowdfunding.controller;
 
 import com.atguigu.atcrowdfunding.Consts;
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.service.UserService;
 import com.atguigu.atcrowdfunding.util.MD5Util;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -91,7 +93,29 @@ public class DispatcherController {
     }*/
 
     @RequestMapping("/main")
-    public String main(){
+    public String main(HttpSession session){
+
+        User user = (User) session.getAttribute(Consts.LOGIN_USER);
+
+        List<Permission> permissions = userService.queryUserPermissonById(user.getId());
+
+        Permission permissionRoot = null;
+
+        Map<Integer,Permission> map = new HashMap<Integer, Permission>();
+        for (Permission innerPermission : permissions){
+            map.put(innerPermission.getId(),innerPermission);
+        }
+        for (Permission child : permissions){
+            if (child.getPid()==null){
+               permissionRoot = child;
+            }else if (child.getPid()!=null){
+                Permission permission = map.get(child.getPid());
+                permission.getChildren().add(child);
+            }
+        }
+
+        session.setAttribute("permissionRoot",permissionRoot);
+
         return "main";
     }
 

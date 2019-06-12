@@ -2,6 +2,7 @@ package com.atguigu.atcrowdfunding.manager.service.impl;
 
 import com.atguigu.atcrowdfunding.Consts;
 import com.atguigu.atcrowdfunding.LoginFailException;
+import com.atguigu.atcrowdfunding.bean.Permission;
 import com.atguigu.atcrowdfunding.bean.Role;
 import com.atguigu.atcrowdfunding.bean.User;
 import com.atguigu.atcrowdfunding.manager.dao.UserMapper;
@@ -135,6 +136,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public int deleteAssign(Integer userid, VoModel model) {
         return userMapper.deleteAssign(userid,model);
+    }
+
+    @Override
+    public List<Permission> queryUserPermissonById(Integer id) {
+        return userMapper.queryUserPermissonById(id);
     }
 
 
