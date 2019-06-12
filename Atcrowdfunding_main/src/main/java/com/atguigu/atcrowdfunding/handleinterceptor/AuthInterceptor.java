@@ -40,7 +40,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 return false;
             }
         }else {
-            return ;
+            return true;
         }
 
     }
