@@ -66,6 +66,7 @@
     <!--声明拦截器对象-->
     <mvc:interceptors>
         <bean id="LoginIntercepter" class="com.atguigu.atcrowdfunding.handleinterceptor.LoginIntercepter"></bean>
+        <bean id="AuthInterceptor" class="com.atguigu.atcrowdfunding.handleinterceptor.AuthInterceptor"></bean>
     </mvc:interceptors>
 
 </beans>
